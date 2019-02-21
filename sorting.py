@@ -18,7 +18,18 @@ def selection_sort(lst):
                 min_j = j
         lst[i], lst[min_j] = lst[min_j], lst[i]
 
-# lst = random_list(100)
+def insertion_sort(lst):
+    for i in range(1, len(lst)):
+        val, j = lst[i], i
+        while j > 0 and lst[j - 1] > val:
+            lst[j] = lst[j - 1]
+            j -= 1
+        lst[j] = val
+
+# =================== O(N log N) algorithms ===================
+
+
+# lst = random_list(100, 1000)
 # print(lst)
-# selection_sort(lst)
+# insertion_sort(lst)
 # print(lst)

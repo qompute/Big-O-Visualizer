@@ -18,13 +18,13 @@ def test_algorithm(function, input_generator, size_range):
 x = range(1, 500, 2)
 
 y = test_algorithm(bubble_sort, random_list, x)
-plt.scatter(x, y, c='b', label='bubble sort')
+plt.scatter(x, y, c='b', label='Bubble sort')
 
 y = test_algorithm(selection_sort, random_list, x)
-plt.scatter(x, y, c='r', label='selection sort')
+plt.scatter(x, y, c='r', label='Selection sort')
 
-y = test_algorithm(sorted, random_list, x)
-plt.scatter(x, y, c='y', label="Python's default sorted()")
+y = test_algorithm(insertion_sort, random_list, x)
+plt.scatter(x, y, c='y', label='Insertion sort')
 
 plt.suptitle('Analysis of Sorting Algorithms')
 plt.xlabel('Size of Array (N)')
