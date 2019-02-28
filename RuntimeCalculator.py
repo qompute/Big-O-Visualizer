@@ -15,6 +15,9 @@ def test_algorithm(function, input_generator, size_range):
         speeds.append(end - start)
     return speeds
 
+"""Performs a least-squares linear regression on x and y.
+Returns the y-intercept, the slope, and the coefficient of determination.
+"""
 def linear_regression(x, y):
     meanX = sum(x) / len(x)
     meanY = sum(y) / len(y)
@@ -27,32 +30,47 @@ def linear_regression(x, y):
     r_squared = ss_xy * ss_xy / (ss_xx * ss_yy)
     return a, b, r_squared
 
-def draw_line(plt, x, y, color):
-    line = linear_regression(x, y)
-    end = max(x)
-    plt.plot((0, end), (line[0], line[1] * end), color)
+"""Finds the best function to fit the given data.
+"""
+def find_best_function(x, y):
+    log_x = [math.log(i) for i in x]
+    log_y = [math.log(i) for i in y]
+
+    _, power, _ = linear_regression(log_x, log_y)
+    power = int(round(power))
+    x_power = [i ** power for i in x]
+    _, coefficient, _ = linear_regression(x_power, y)
+    return lambda x: coefficient * x ** power
+
+"""Graphs a function on a given pyplot.
+"""
+def graph_function(plt, x, f, color):
+    y = []
+    for input in x:
+        y.append(f(input))
+    plt.plot(x, y, color)
 
 x = range(1, 500, 2)
 
 y = test_algorithm(bubble_sort, random_list, x)
 plt.scatter(x, y, c='blue', label='Bubble sort')
-draw_line(plt, x, y, 'b-')
+graph_function(plt, x, find_best_function(x, y), 'b-')
 
 y = test_algorithm(selection_sort, random_list, x)
 plt.scatter(x, y, c='red', label='Selection sort')
-draw_line(plt, x, y, 'r-')
+graph_function(plt, x, find_best_function(x, y), 'r-')
 
 y = test_algorithm(insertion_sort, random_list, x)
 plt.scatter(x, y, c='yellow', label='Insertion sort')
-draw_line(plt, x, y, 'y-')
+graph_function(plt, x, find_best_function(x, y), 'y-')
 
 y = test_algorithm(merge_sort, random_list, x)
 plt.scatter(x, y, c='green', label='Merge sort')
-draw_line(plt, x, y, 'g-')
+graph_function(plt, x, find_best_function(x, y), 'g-')
 
 y = test_algorithm(quicksort, random_list, x)
 plt.scatter(x, y, c='magenta', label='Quicksort')
-draw_line(plt, x, y, 'm-')
+graph_function(plt, x, find_best_function(x, y), 'm-')
 
 plt.suptitle('Analysis of Sorting Algorithms')
 plt.xlabel('Size of Array (N)')
