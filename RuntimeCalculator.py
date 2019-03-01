@@ -36,11 +36,48 @@ def find_best_function(x, y):
     log_x = [math.log(i) for i in x]
     log_y = [math.log(i) for i in y]
 
+    # Polynomial
     _, power, _ = linear_regression(log_x, log_y)
     power = int(round(power))
     x_power = [i ** power for i in x]
-    _, coefficient, _ = linear_regression(x_power, y)
-    return lambda x: coefficient * x ** power
+    _, multiplier, r2 = linear_regression(x_power, y)
+    if power == 1:
+        complexity = 'N'
+    else:
+        complexity = 'N^' + str(power)
+    coefficient = multiplier
+    function = lambda x: coefficient * x ** power
+
+    # Exponential
+    _, base, _ = linear_regression(x, log_y)
+    base = int(round(math.exp(base)))
+    if base > 1:
+        x_exp = [base ** i for i in x]
+        _, multiplier, new_r2 = linear_regression(x_exp, y)
+        if new_r2 > r2:
+            coefficient = multiplier
+            function = lambda x: coefficient * base ** x
+            if base == 1:
+                complexity = '1'
+            else:
+                complexity = str(base) + '^N'
+
+    # Logarithmic
+    _, multiplier, new_r2 = linear_regression(log_x, y)
+    if new_r2 > r2:
+        coefficient = multiplier
+        function = lambda x: coefficient * math.log(x)
+        complexity = 'log N'
+
+    # Linearithmic
+    x_log_x = [i * math.log(i) for i in x]
+    _, multiplier, new_r2 = linear_regression(x_log_x, y)
+    if new_r2 > r2:
+        coefficient = multiplier
+        function = lambda x: coefficient * x * math.log(x)
+        complexity = 'N log N'
+
+    return complexity, function
 
 """Graphs a function on a given pyplot.
 """
@@ -54,23 +91,33 @@ x = range(1, 500, 2)
 
 y = test_algorithm(bubble_sort, random_list, x)
 plt.scatter(x, y, c='blue', label='Bubble sort')
-graph_function(plt, x, find_best_function(x, y), 'b-')
+runtime, func = find_best_function(x, y)
+graph_function(plt, x, func, 'b-')
+print 'Bubble sort:', runtime
 
 y = test_algorithm(selection_sort, random_list, x)
 plt.scatter(x, y, c='red', label='Selection sort')
-graph_function(plt, x, find_best_function(x, y), 'r-')
+runtime, func = find_best_function(x, y)
+graph_function(plt, x, func, 'r-')
+print 'Selection sort:', runtime
 
 y = test_algorithm(insertion_sort, random_list, x)
 plt.scatter(x, y, c='yellow', label='Insertion sort')
-graph_function(plt, x, find_best_function(x, y), 'y-')
+runtime, func = find_best_function(x, y)
+graph_function(plt, x, func, 'y-')
+print 'Insertion sort:', runtime
 
 y = test_algorithm(merge_sort, random_list, x)
 plt.scatter(x, y, c='green', label='Merge sort')
-graph_function(plt, x, find_best_function(x, y), 'g-')
+runtime, func = find_best_function(x, y)
+graph_function(plt, x, func, 'g-')
+print 'Merge sort:', runtime
 
 y = test_algorithm(quicksort, random_list, x)
 plt.scatter(x, y, c='magenta', label='Quicksort')
-graph_function(plt, x, find_best_function(x, y), 'm-')
+runtime, func = find_best_function(x, y)
+graph_function(plt, x, func, 'm-')
+print 'Quicksort:', runtime
 
 plt.suptitle('Analysis of Sorting Algorithms')
 plt.xlabel('Size of Array (N)')
