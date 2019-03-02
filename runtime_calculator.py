@@ -1,19 +1,23 @@
 import time
 import math
 import matplotlib.pyplot as plt
-from sorting import *
 
 """ Tests the runtime of a given function by repeating many trials.
 """
-def test_algorithm(function, input_generator, size_range):
-    speeds = []
-    for n in size_range:
+def test_algorithm(function, input_generator, step_size=1, time_limit=1):
+    input_sizes, speeds = [], []
+    n, total_time = 0, 0
+    while total_time < time_limit:
+        n += step_size
+        input_sizes.append(n)
         args = input_generator(n)
         start = time.time()
         function(args)
         end = time.time()
-        speeds.append(end - start)
-    return speeds
+        elapsed_time = end - start
+        speeds.append(elapsed_time)
+        total_time += elapsed_time
+    return input_sizes, speeds
 
 """Performs a least-squares linear regression on x and y.
 Returns the y-intercept, the slope, and the coefficient of determination.
@@ -86,41 +90,3 @@ def graph_function(plt, x, f, color):
     for input in x:
         y.append(f(input))
     plt.plot(x, y, color)
-
-x = range(1, 500, 2)
-
-y = test_algorithm(bubble_sort, random_list, x)
-plt.scatter(x, y, c='blue', label='Bubble sort')
-runtime, func = find_best_function(x, y)
-graph_function(plt, x, func, 'b-')
-print 'Bubble sort:', runtime
-
-y = test_algorithm(selection_sort, random_list, x)
-plt.scatter(x, y, c='red', label='Selection sort')
-runtime, func = find_best_function(x, y)
-graph_function(plt, x, func, 'r-')
-print 'Selection sort:', runtime
-
-y = test_algorithm(insertion_sort, random_list, x)
-plt.scatter(x, y, c='yellow', label='Insertion sort')
-runtime, func = find_best_function(x, y)
-graph_function(plt, x, func, 'y-')
-print 'Insertion sort:', runtime
-
-y = test_algorithm(merge_sort, random_list, x)
-plt.scatter(x, y, c='green', label='Merge sort')
-runtime, func = find_best_function(x, y)
-graph_function(plt, x, func, 'g-')
-print 'Merge sort:', runtime
-
-y = test_algorithm(quicksort, random_list, x)
-plt.scatter(x, y, c='magenta', label='Quicksort')
-runtime, func = find_best_function(x, y)
-graph_function(plt, x, func, 'm-')
-print 'Quicksort:', runtime
-
-plt.suptitle('Analysis of Sorting Algorithms')
-plt.xlabel('Size of Array (N)')
-plt.ylabel('Runtime (seconds)')
-plt.legend(loc='upper left')
-plt.show()
