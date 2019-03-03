@@ -2,11 +2,16 @@ import time
 import math
 import matplotlib.pyplot as plt
 
+"""The identity function.
+"""
+identity = lambda n: n
+
 """ Tests the runtime of a given function by repeating many trials.
 """
-def test_algorithm(function, input_generator, step_size=1, time_limit=1):
+def test_algorithm(function, input_generator=identity, min_size=1,
+            step_size=1, time_limit=1):
     input_sizes, speeds = [], []
-    n, total_time = 0, 0
+    n, total_time = min_size, 0
     while total_time < time_limit:
         n += step_size
         input_sizes.append(n)
@@ -15,8 +20,9 @@ def test_algorithm(function, input_generator, step_size=1, time_limit=1):
         function(args)
         end = time.time()
         elapsed_time = end - start
-        speeds.append(elapsed_time)
-        total_time += elapsed_time
+        if elapsed_time > 0:
+            speeds.append(elapsed_time)
+            total_time += elapsed_time
     return input_sizes, speeds
 
 """Performs a least-squares linear regression on x and y.
