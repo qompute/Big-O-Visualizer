@@ -14,13 +14,13 @@ def test_algorithm(function, input_generator=identity, min_size=1,
     n, total_time = min_size, 0
     while total_time < time_limit:
         n += step_size
-        input_sizes.append(n)
         args = input_generator(n)
         start = time.time()
         function(args)
         end = time.time()
         elapsed_time = end - start
         if elapsed_time > 0:
+            input_sizes.append(n)
             speeds.append(elapsed_time)
             total_time += elapsed_time
     return input_sizes, speeds
