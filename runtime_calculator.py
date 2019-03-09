@@ -49,14 +49,19 @@ def find_best_function(x, y):
     # Polynomial
     _, power, _ = linear_regression(log_x, log_y)
     power = int(round(power))
-    x_power = [i ** power for i in x]
-    _, multiplier, r2 = linear_regression(x_power, y)
-    if power == 1:
-        complexity = 'N'
+    if power == 0:
+        complexity = '1'
+        constant, _, r2 = linear_regression(x, y)
+        function = lambda x: constant
     else:
-        complexity = 'N^' + str(power)
-    coefficient = multiplier
-    function = lambda x: coefficient * x ** power
+        x_power = [i ** power for i in x]
+        _, multiplier, r2 = linear_regression(x_power, y)
+        if power == 1:
+            complexity = 'N'
+        else:
+            complexity = 'N^' + str(power)
+        coefficient = multiplier
+        function = lambda x: coefficient * x ** power
 
     # Exponential
     _, base, _ = linear_regression(x, log_y)
