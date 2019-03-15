@@ -26,21 +26,21 @@ def quadratic_function(n):
 # plt.scatter(x, y, c='blue', label='Linear')
 # runtime, func = find_best_function(x, y)
 # graph_function(plt, x, func, 'b-')
-# print 'Linear Time Algorithm:', runtime
+# print('Linear Time Algorithm:', runtime)
 #
 # # Expected: Quadratic time algorithm
 # x, y = test_algorithm(quadratic_function)
 # plt.scatter(x, y, c='red', label='Quadratic')
 # runtime, func = find_best_function(x, y)
 # graph_function(plt, x, func, 'r-')
-# print 'Quadratic Time Algorithm:', runtime
+# print('Quadratic Time Algorithm:', runtime)
 #
 # # Expected: Linearithmic time algorithm
 # x, y = test_algorithm(linearithmic_function)
 # plt.scatter(x, y, c='yellow', label='Linearithmic')
 # runtime, func = find_best_function(x, y)
 # graph_function(plt, x, func, 'y-')
-# print 'Linearithmic Time Algorithm:', runtime
+# print('Linearithmic Time Algorithm:', runtime)
 #
 #
 # plt.xlabel('Size of Input (N)')

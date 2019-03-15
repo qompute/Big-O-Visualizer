@@ -48,7 +48,7 @@ def find_best_function(x, y):
 
     # Polynomial
     _, power, _ = linear_regression(log_x, log_y)
-    # power = int(round(power))
+    power = int(round(power))
     if power == 0:
         complexity = '1'
         constant, _, r2 = linear_regression(x, y)
