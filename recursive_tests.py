@@ -30,21 +30,21 @@ def f3(n):
 
 # Expected: N log N
 x, y = test_algorithm(f1)
-plt.scatter(x, y, c='blue', label='f1')
+plt.scatter(x, y, c='blue', label='f1', marker='.')
 runtime, func = find_best_function(x, y)
 graph_function(plt, x, func, 'b-')
 print('f1:', runtime)
 
 # Expected: 2^N
 x, y = test_algorithm(f2)
-plt.scatter(x, y, c='red', label='f2')
+plt.scatter(x, y, c='red', label='f2', marker='.')
 runtime, func = find_best_function(x, y)
 graph_function(plt, x, func, 'r-')
 print('f2:', runtime)
 
 # Expected: N
 x, y = test_algorithm(f3)
-plt.scatter(x, y, c='yellow', label='f3')
+plt.scatter(x, y, c='yellow', label='f3', marker='.')
 runtime, func = find_best_function(x, y)
 graph_function(plt, x, func, 'y-')
 print('f3:', runtime)

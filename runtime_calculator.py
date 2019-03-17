@@ -9,10 +9,16 @@ identity = lambda n: n
 """ Tests the runtime of a given function by repeating many trials.
 """
 def test_algorithm(function, input_generator=identity, min_size=1,
-            step_size=1, time_limit=1):
+            max_size=None, step_size=1, time_limit=None):
+    if not max_size and not time_limit:
+        time_limit = 1
+    if not max_size:
+        max_size = float('inf')
+    if not time_limit:
+        time_limit = float('inf')
     input_sizes, speeds = [], []
     n, total_time = min_size, 0
-    while total_time < time_limit:
+    while n <= max_size and total_time < time_limit:
         n += step_size
         args = input_generator(n)
         start = time.time()
