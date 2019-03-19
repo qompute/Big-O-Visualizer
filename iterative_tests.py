@@ -1,5 +1,4 @@
 from runtime_calculator import *
-from simple_tests import *
 
 """An iterative quadratic-time function.
 """

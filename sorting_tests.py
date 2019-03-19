@@ -1,8 +1,8 @@
 from sorting import *
 from runtime_calculator import *
 
-max_n = 1000
-step = 3
+max_n = 500
+step = 5
 
 x, y = test_algorithm(bubble_sort, random_list, step_size=step, max_size=max_n)
 plt.scatter(x, y, c='blue', label='Bubble sort', marker='.')
@@ -34,7 +34,7 @@ runtime, func = find_best_function(x, y)
 graph_function(plt, x, func, 'm-')
 print('Quicksort:', runtime)
 
-plt.suptitle('Analysis of Efficient Sorting Algorithms')
+plt.suptitle('Analysis of Sorting Algorithms')
 plt.xlabel('Size of Array (N)')
 plt.ylabel('Runtime (seconds)')
 plt.legend(loc='upper left')

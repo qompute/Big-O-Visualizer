@@ -1,12 +1,12 @@
 from runtime_calculator import *
-from simple_tests import *
 
 """A recursive linearithmic-time function.
 """
 def f1(n):
     if n < 1:
         return
-    linear_function(n)
+    for _ in range(n):
+        pass
     f1(n // 2)
     f1(n // 2)
 
@@ -49,6 +49,7 @@ runtime, func = find_best_function(x, y)
 graph_function(plt, x, func, 'y-')
 print('f3:', runtime)
 
+plt.suptitle('Runtime of Divide-and-Conquer Function f1')
 plt.xlabel('Size of Input (N)')
 plt.ylabel('Runtime (seconds)')
 plt.legend(loc='upper left')
