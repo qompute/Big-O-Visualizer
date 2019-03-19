@@ -45,4 +45,21 @@ Insertion sort: N^2
 Merge sort: N log N
 Quicksort: N log N
 ```
-This matches quite nicely with their expected average-case runtimes! Note that this method is not perfect; sometimes it might misinterpret an N log N algorithm with N, or vice versa. This is why it's better to turn to actual [algorithm analysis](https://en.wikipedia.org/wiki/Analysis_of_algorithms) methods rather than simply running an algorithm thousands of times. But it's interesting to see that the real-world data that matches our expected runtimes!
+This matches quite nicely with their expected average-case runtimes! Note that this method is not perfect; sometimes it might misinterpret an N log N algorithm with N, or vice versa. This is why it's better to turn to actual [algorithm analysis](https://en.wikipedia.org/wiki/Analysis_of_algorithms) methods rather than simply running an algorithm thousands of times. But it's interesting to see that the real-world data matches our expectations!
+
+### Other functions
+The files [`iterative_tests.py`](iterative_tests.py) and [`recursive_tests.py`](recursive_tests.py) contain some other functions with interesting runtimes, such as this one:
+```python
+def f1(n):
+    if n < 1:
+        return
+    for _ in range(n):
+        pass
+    f1(n // 2)
+    f1(n // 2)
+```
+What's the runtime of this function? This is an example of an algorithm whose runtime can be solved with a recurrence relation. (There are many ways of doing this. One way is to use the [master theorem for divide-and-conquer recurrences](https://en.wikipedia.org/wiki/Master_theorem_(analysis_of_algorithms)).) As it turns out, this function has a runtime of Θ(N log N). The `find_best_function` function correctly identifies this as a linearithmic function:
+
+![Scatterplot of Recursive Function f1](/images/f1-graph.png)
+
+See [`iterative_tests.py`](iterative_tests.py) and [`recursive_tests.py`](recursive_tests.py) for more examples like this.
