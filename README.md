@@ -45,7 +45,7 @@ Insertion sort: N^2
 Merge sort: N log N
 Quicksort: N log N
 ```
-This matches quite nicely with their expected average-case runtimes! Note that this method is not perfect; sometimes it might misinterpret an N log N algorithm with N, or vice versa. This is why it's better to turn to actual [algorithm analysis](https://en.wikipedia.org/wiki/Analysis_of_algorithms) methods rather than simply running an algorithm thousands of times. But it's interesting to see that the real-world data matches our expectations!
+This matches quite nicely with the expected average-case runtimes! Note that this method is not perfect; sometimes it might misinterpret an N log N algorithm as N, or vice versa. This is why it's better to turn to actual [algorithm analysis](https://en.wikipedia.org/wiki/Analysis_of_algorithms) methods rather than simply running an algorithm thousands of times. But it's interesting to see that the real-world data matches our expectations!
 
 ### Other functions
 The files [`iterative_tests.py`](iterative_tests.py) and [`recursive_tests.py`](recursive_tests.py) contain some other functions with interesting runtimes, such as this one:
