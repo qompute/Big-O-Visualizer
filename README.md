@@ -29,7 +29,7 @@ The `find_best_function` function uses several linear regression methods to find
 Some examples are given in the files [`simple_tests.py`](simple_tests.py), [`iterative_tests.py`](iterative_tests.py), [`recursive_tests.py`](recursive_tests.py), and [`sorting_tests.py`](sorting_tests.py). We'll show you an example in `sorting_tests.py`.
 
 ### Array Sorting
-Of course, no introduction to algorithmic runtime complexities would be complete without an analysis of sorting algorithms! The file [`sorting.py`](sorting.py) contains implementations of several common sorting algorithms: [bubble sort](https://en.wikipedia.org/wiki/Bubble_sort), [selection sort](https://en.wikipedia.org/wiki/Selection_sort), [insertion sort](https://en.wikipedia.org/wiki/Insertion_sort), [merge sort](https://en.wikipedia.org/wiki/Merge_sort), and [quicksort](https://en.wikipedia.org/wiki/Quicksort). The `sorting_tests.py` file tests each of these sorting algorithms, fits a curve to each of the functions, and prints out its best guess for the runtime complexity of each algorithm. Here's a graph for the runtimes for each function (graph was created using [matplotlib](https://matplotlib.org/)):
+Of course, no introduction to algorithmic runtime complexities would be complete without an analysis of sorting algorithms! The file [`sorting.py`](sorting.py) contains implementations of several common sorting algorithms: [bubble sort](https://en.wikipedia.org/wiki/Bubble_sort), [selection sort](https://en.wikipedia.org/wiki/Selection_sort), [insertion sort](https://en.wikipedia.org/wiki/Insertion_sort), [merge sort](https://en.wikipedia.org/wiki/Merge_sort), [heapsort](https://en.wikipedia.org/wiki/Heapsort), and [quicksort](https://en.wikipedia.org/wiki/Quicksort). The `sorting_tests.py` file tests each of these sorting algorithms, fits a curve to each of the functions, and prints out its best guess for the runtime complexity of each algorithm. Here's a graph for the runtimes for each function (graph was created using [matplotlib](https://matplotlib.org/)):
 
 ![Scatterplot of Sorting Algorithms](/images/sorting-graph.png)
 
@@ -43,6 +43,7 @@ Bubble sort: N^2
 Selection sort: N^2
 Insertion sort: N^2
 Merge sort: N log N
+Heapsort: N log N
 Quicksort: N log N
 ```
 This matches quite nicely with the expected average-case runtimes! Note that this method is not perfect; sometimes it might misinterpret an N log N algorithm as N, or vice versa. This is why it's better to turn to actual [algorithm analysis](https://en.wikipedia.org/wiki/Analysis_of_algorithms) methods rather than simply running an algorithm thousands of times. But it's interesting to see that the real-world data matches our expectations!
@@ -58,7 +59,7 @@ def f1(n):
     f1(n // 2)
     f1(n // 2)
 ```
-What's the runtime of this function? This is an example of an algorithm whose runtime can be solved with a recurrence relation. (There are many ways of doing this. One way is to use the [master theorem for divide-and-conquer recurrences](https://en.wikipedia.org/wiki/Master_theorem_(analysis_of_algorithms)).) As it turns out, this function has a runtime of Θ(N log N). The `find_best_function` function correctly identifies this as a linearithmic function:
+What's the runtime of this function? This is an example of an algorithm whose runtime can be solved with a recurrence relation. As it turns out, this function has a runtime of Θ(N log N). The `find_best_function` function correctly identifies this as a linearithmic function:
 
 ![Scatterplot of Recursive Function f1](/images/f1-graph.png)
 

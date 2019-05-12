@@ -27,6 +27,30 @@ def insertion_sort(lst):
         lst[j] = val
 
 # =================== O(N log N) algorithms ===================
+def heapsort(lst):
+    def heapify(lst):
+        for start in reversed(range(len(lst))):
+            sink(lst, start, len(lst) - 1)
+    def sink(lst, start, end):
+        current = start
+        while current * 2 + 1 <= end:
+            left = current * 2 + 1
+            right = current * 2 + 2
+            largest = current
+            if lst[largest] < lst[left]:
+                largest = left
+            if right <= end and lst[largest] < lst[right]:
+                largest = right
+            if largest == current:
+                return
+            else:
+                lst[current], lst[largest] = lst[largest], lst[current]
+                current = largest
+    heapify(lst)
+    for i in reversed(range(len(lst))):
+        lst[i], lst[0] = lst[0], lst[i]
+        sink(lst, 0, i - 1)
+
 def merge_sort(lst):
     if len(lst) > 1:
         mid = len(lst) // 2
@@ -70,5 +94,5 @@ def quicksort(lst, begin=0, end=None):
 
 # lst = random_list(100, 1000)
 # print(lst)
-# quicksort(lst)
+# heapsort(lst)
 # print(lst)
